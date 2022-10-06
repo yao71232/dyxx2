@@ -15,25 +15,25 @@ http:
       require-body: true
       timeout: 10
   script:
-    - rewrite: \/Users\/\w{32}\/Items\/\d+\?
+    - match: ^https?:\/\/Users\/\w{32}\/Items\/\d+\?
       name: embywaibu
       type: response
       require-body: true
       timeout: 10      
   script:
-    - rewrite: \/plugin\/scheme
+    - match: ^https?:\/\/plugin\/scheme
       name: embydakai
       type: response
       require-body: true
       timeout: 10 
   script:
-    - rewrite: (\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename)
+    - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
       name: embyweijingtai
-      type: request
+      type: response
       require-body: true
       timeout: 10
   script:
-    - rewrite: (\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename)
+    - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
       name: embychong
       type: response
       require-body: true
