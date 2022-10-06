@@ -1,6 +1,6 @@
 name: Emby调用第三方播放器
 desc: Emby调用第三方播放器
-
+https://github.com/yao71232/dyxx2/blob/main/emby.stoverride
 http:
   mitm:
     - '*.mb3admin.com'
@@ -17,25 +17,25 @@ http:
   script:
     - match: ^https?:\/\/Users\/\w{32}\/Items\/\d+\?
       name: embywaibu
-      type: response
+      type: request
       require-body: true
       timeout: 10      
   script:
     - match: ^https?:\/\/plugin\/scheme
       name: embydakai
-      type: response
+      type: request
       require-body: true
       timeout: 10 
   script:
     - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
       name: embyweijingtai
-      type: response
+      type: request
       require-body: true
       timeout: 10
   script:
     - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
       name: embychong
-      type: response
+      type: request
       require-body: true
       timeout: 10 
 
