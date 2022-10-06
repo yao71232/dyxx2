@@ -1,0 +1,57 @@
+name: Emby调用第三方播放器
+desc: Emby调用第三方播放器
+https://github.com/yao71232/dyxx2/blob/main/emby.stoverride
+http:
+  mitm:
+    - '*.mb3admin.com'
+    - '*.emby.wtf'
+    - '*.plusmedia.site'
+    - '*.jmsooo.com'
+    - '*.ccemby.tk'
+  script:
+    - match: ^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice
+      name: embyunlock
+      type: response
+      require-body: true
+      timeout: 10
+  script:
+    - match: ^https?:\/\/Users\/\w{32}\/Items\/\d+\?
+      name: embywaibu
+      type: request
+      require-body: true
+      timeout: 10      
+  script:
+    - match: ^https?:\/\/plugin\/scheme
+      name: embydakai
+      type: request
+      require-body: true
+      timeout: 10 
+  script:
+    - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
+      name: embyweijingtai
+      type: request
+      require-body: true
+      timeout: 10
+  script:
+    - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
+      name: embychong
+      type: request
+      require-body: true
+      timeout: 10 
+
+script-providers:
+  embyunlock:
+    url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/quantumult-x/unlock.js
+    interval: 8640
+  embywaibu:
+    url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js
+    interval: 8640
+  embydakai:
+    url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js
+    interval: 8640
+  embyweijingtai:
+    url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js
+    interval: 8640
+  embychong:
+    url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/quantumult-x/download-file-rename.js
+    interval: 8640
