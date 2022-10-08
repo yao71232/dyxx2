@@ -16,8 +16,8 @@ http:
     - "www.xmind.cn"
     - "www.xmind.net"
     - "biz.caiyunapp.com"
-    - "spclient.wg.spotify.com"
-    - "pan.baidu.com"
+    - "api.m.jd.com"
+    - "trade-acs.m.taobao.com"
   script:
    # 七猫小说(2022.01.18).    *.wtzw.com
     - match: ^https?:\/\/(api-\w+|xiaoshuo)\.wtzw\.com\/api\/v\d\/
@@ -77,6 +77,23 @@ http:
       type: response
       require-body: true
       timeout: 30
+   # 京东比价
+    - match: ^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig)
+      name: jd
+      type: response
+      require-body: true
+      timeout: 30
+   # 淘宝比价
+    - match: ^http://.+/amdc/mobileDispatch
+      name: taobao1
+      type: request
+      require-body: true
+      timeout: 30
+    - match: ^https?://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail
+      name: taobao2
+      type: response
+      require-body: true
+      timeout: 30
          
 script-providers:
   qimao:
@@ -108,6 +125,15 @@ script-providers:
     interval: 86400
   caiyun:
     url: https://gjds.vip/QX/pojie/cytq.js
+    interval: 86400
+  jd:
+    url: https://service.2ti.st/QuanX/Script/jd_tb_price/main.js
+    interval: 86400
+  taobao1:
+    url: https://service.2ti.st/QuanX/Script/jd_tb_price/main.js
+    interval: 86400
+  taobao2:
+    url: https://service.2ti.st/QuanX/Script/jd_tb_price/main.js
     interval: 86400
 
     
