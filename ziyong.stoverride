@@ -1,4 +1,4 @@
-name: ziyong
+name: 自用常用规则
 desc: 自用覆写
 http:
   mitm:
