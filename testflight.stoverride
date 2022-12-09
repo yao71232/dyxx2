@@ -29,3 +29,6 @@ script-providers:
   join:
     url: https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/testflight/TF_keys.js
     interval: 86400
+  join_tf:
+    url: https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/testflight/Auto_join_TF.js
+    interval: 86400
