@@ -1,0 +1,16 @@
+name: testflight自动加入测试2
+desc: testflight自动加入测试2
+http:
+  mitm:
+    - 'testflight.apple.com'
+
+cron:
+  script:
+    - name: join_tf
+      cron: '*/30 * * * * *'
+      timeout: 60
+  
+script-providers:
+  join_tf:
+    url: https://raw.githubusercontent.com/songyangzz/QuantumultX/master/testflight.js
+    interval: 86400
