@@ -1,0 +1,31 @@
+name: testflight自动加入测试
+desc: testflight自动加入测试
+http:
+  mitm:
+    - 'testflight.apple.com'
+  script:
+    - match: ^https:\/\/testflight\.apple\.com\/v3\/accounts/.*\/apps$
+      name: TF_keys
+      type: request
+      require-body: false
+      timeout: 30
+    - match: ^https://testflight.apple.com/join/(.*)
+      name: join
+      type: request
+      require-body: false
+      timeout: 30
+           
+cron:
+  script:
+    - name: join_tf
+      cron: '*/30 * * * * *'
+      timeout: 60
+           
+        
+script-providers:
+  TF_keys:
+    url: https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/testflight/TF_keys.js
+    interval: 86400
+  join:
+    url: https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/testflight/TF_keys.js
+    interval: 86400
