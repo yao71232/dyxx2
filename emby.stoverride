@@ -7,13 +7,13 @@ http:
     - "*.plusmedia.site"
     - "*.jmsooo.com"
   script:
-＃ 播放解鋭
+   ＃ 播放解鋭
    - match: ^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice
      name: unlock 
      type: response 
      require-body: true 
      timeout: 30
-# 添加外部播放器连接
+   # 添加外部播放器连接
    - match: \/Users\/\w{32}\/Items\/\d+\?
      name: Emby-plugin
      type: response
