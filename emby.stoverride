@@ -1,57 +1,49 @@
-name: Emby调用第三方播放器
-desc: Emby调用第三方播放器
-https://github.com/yao71232/dyxx2/blob/main/emby.stoverride
+name: Emby Plugin
+desc: Emby官方客戸端内凋用外部播放
 http:
   mitm:
-    - '*.mb3admin.com'
-    - '*.emby.wtf'
-    - '*.plusmedia.site'
-    - '*.jmsooo.com'
-    - '*.ccemby.tk'
+    - "mb3admin.com"
+    - "*.emby.wtf"
+    - "*.plusmedia.site"
+    - "*.jmsooo.com"
   script:
-    - match: ^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice
-      name: embyunlock
-      type: response
-      require-body: true
-      timeout: 10
-  script:
-    - match: ^https?:\/\/Users\/\w{32}\/Items\/\d+\?
-      name: embywaibu
-      type: request
-      require-body: true
-      timeout: 10      
-  script:
-    - match: ^https?:\/\/plugin\/scheme
-      name: embydakai
-      type: request
-      require-body: true
-      timeout: 10 
-  script:
-    - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
-      name: embyweijingtai
-      type: request
-      require-body: true
-      timeout: 10
-  script:
-    - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
-      name: embychong
-      type: request
-      require-body: true
-      timeout: 10 
-
+＃ 播放解鋭
+   - match: ^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice
+     name: unlock 
+     type: response 
+     require-body: true 
+     timeout: 30
+# 添加外部播放器连接
+   - match: ^https?:\/\/Users\/\w{32}\/Items\/\d+\?
+     name : Emby-plugin
+     type: response
+     require-body: true
+     timeout: 30
+＃ 打开外部播放器
+   - match: ^https?:\/\/plugin\/scheme
+     name: Emby-plugin 
+     type: response
+     require-body: true
+     timeout: 30
+＃資源路径仂静恋
+   - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
+     name: Emby-plugin
+     type: request 
+     require-body: false
+     timeout: 30
+＃ 下载文件重命名
+   - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
+     name: dfr 
+     type: response 
+     require-body: false 
+     timeout: 30
 script-providers:
-  embyunlock:
+  unlock:
     url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/quantumult-x/unlock.js
-    interval: 8640
-  embywaibu:
+    interval: 86400
+  Emby-plugin:
     url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js
-    interval: 8640
-  embydakai:
-    url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js
-    interval: 8640
-  embyweijingtai:
-    url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js
-    interval: 8640
-  embychong:
-    url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/quantumult-x/download-file-rename.js
-    interval: 8640
+    interval: 86400 
+  dfr:
+    url: https://raw.githubusercontent.com/rartv/EmbyPublic/test/quantumult-x/download-file-rename.js 
+    interval: 86400
