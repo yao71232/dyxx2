@@ -14,25 +14,25 @@ http:
      require-body: true 
      timeout: 30
 # 添加外部播放器连接
-   - match: ^https?:\/\/Users\/\w{32}\/Items\/\d+\?
-     name : Emby-plugin
+   - match: \/Users\/\w{32}\/Items\/\d+\?
+     name: Emby-plugin
      type: response
      require-body: true
      timeout: 30
 ＃ 打开外部播放器
-   - match: ^https?:\/\/plugin\/scheme
+   - match: \/plugin\/scheme
      name: Emby-plugin 
      type: response
      require-body: true
      timeout: 30
 ＃資源路径仂静恋
-   - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
+   - match: (\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename)
      name: Emby-plugin
      type: request 
      require-body: false
      timeout: 30
 ＃ 下载文件重命名
-   - match: ^https?:\/\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename
+   - match: (\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename)
      name: dfr 
      type: response 
      require-body: false 
