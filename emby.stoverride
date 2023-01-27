@@ -6,6 +6,8 @@ http:
     - "*.emby.wtf"
     - "*.plusmedia.site"
     - "*.jmsooo.com"
+    - "*.misakaf.org"
+
   script:
    # 播放解鋭
     - match: ^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice
