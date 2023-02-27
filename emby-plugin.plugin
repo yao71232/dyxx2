@@ -1,0 +1,12 @@
+#!name= Emby破解+调用播放器
+#!icon= https://raw.githubusercontent.com/Tartarus2014/For-own-use/master/Color/EMBY.png
+
+[Script]
+http-response ^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/quantumult-x/unlock.js, requires-body=true, timeout=30, tag=播放解锁
+http-response \/Users\/\w{32}\/Items\/\d+\? script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js, requires-body=true, timeout=30, tag=添加外部播放器链接
+http-response \/plugin\/scheme script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js, requires-body=true, timeout=30, tag=打开外部播放器
+http-request (\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename) script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js, timeout=30, tag=资源路径伪静态
+http-response (\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename) script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/quantumult-x/download-file-rename.js, timeout=30, tag=下载文件重命名
+
+[MITM]
+hostname = *.mb3admin.com,*.emby.wtf,*.plusmedia.site,*.jmsooo.com
