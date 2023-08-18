@@ -1,0 +1,344 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: info
+ipv6: false 
+external-controller: 127.0.0.1:9090
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  enhanced-mode: redir-host
+  fake-ip-range: 28.0.0.1/8
+  nameserver:
+    - https://dns.google/dns-query
+    - https://dns.cloudflare.com/dns-query
+    - https://doh.dns.sb/dns-query
+    - tcp://208.67.222.222:443
+    - tls://dns.google
+sniffer:
+  enable: true
+  force-dns-mapping: true 
+  parse-pure-ip: true 
+  force-domain: 
+  - "+.netflix.com" 
+  - "+.nflxvideo.net" 
+  - 'google.com'
+  sniffing:
+    - tls
+    - http
+  skip-domain:
+    - 'Mijia Cloud'
+    - 'dlg.io.mi.com'
+    - '+.apple.com'
+  port-whitelist:
+    - 80
+    - 443
+    - 8000-9000
+# force-domain:
+#   - '+'  
+proxies:
+  - name: silicloud-东京
+    type: trojan
+    server: sili.110731.xyz
+    port: 37776
+    password: 6128ed8b-be1f-45f5-8cff-1162dc3c2422
+    udp: true
+    sni: sili.110731.xyz
+  - name: 甲骨文-日本
+    type: trojan
+    server: jp.110731.xyz
+    port: 37776
+    password: 97686aea-f43f-47c8-97de-f20f721228a8
+    udp: true
+    sni: jp.110731.xyz
+  - name: silicloud-洛杉矶
+    type: trojan
+    server: us.110731.xyz
+    port: 37776
+    password: 63e3aaea-be53-4682-83e7-360d7df20b8b
+    udp: true
+    sni: us.110731.xyz
+  - name: warp+  
+    ip: 172.16.0.2
+    ipv6: 2606:4700:110:8f9a:283a:16b4:1d54:1827
+    keepalive: 45
+    mtu: 1280
+    udp: true
+    port: 2408
+    private-key: IP2J+cZysHlM4qkS70pgzN0L+0/KuqrtosCUXPyJZkA=
+    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+    server: 162.159.193.5
+    type: wireguard
+    reserved: [147,55,98]
+proxy-groups:
+  - name: 节点选择
+    type: select
+    proxies:
+      - 自动选择
+      - DIRECT
+      - 负载均衡-轮询
+      - silicloud-东京
+      - 甲骨文-日本   
+      - silicloud-洛杉矶
+      - warp+    
+  - name: 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png    
+    proxies:
+      - silicloud-东京
+      - 甲骨文-日本
+      - silicloud-洛杉矶
+  - name: 负载均衡-轮询
+    type: load-balance
+    url: http://www.google.com/generate_204
+    interval: 300
+    strategy: round-robin
+    proxies:
+      - silicloud-东京
+      - 甲骨文-日本
+      - silicloud-洛杉矶      
+  - name: Netflix
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png    
+    proxies:
+      - silicloud-东京
+      - 甲骨文-日本
+      - silicloud-洛杉矶
+      - 节点选择      
+  - name: Disney+
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney.png    
+    proxies:
+      - silicloud-东京
+      - 甲骨文-日本
+      - silicloud-洛杉矶      
+      - 节点选择
+  - name: emby公益服
+    type: select
+    proxies:
+      - 节点选择    
+      - 全球直连
+  - name: 哔哩哔哩
+    type: select
+    proxies:
+      - 全球直连
+      - 节点选择      
+  - name: 国外媒体
+    type: select
+    proxies:
+      - 节点选择
+      - 自动选择
+      - 负载均衡-轮询
+  - name: Speedtest
+    type: select
+    proxies:
+      - 节点选择
+      - 全球直连
+      - 负载均衡-轮询      
+  - name: 微软服务
+    type: select
+    proxies:
+      - 节点选择
+      - 全球直连
+      - 负载均衡-轮询
+  - name: 苹果服务
+    type: select
+    proxies:
+      - 节点选择
+      - 全球直连
+      - 负载均衡-轮询
+  - name: 谷歌服务
+    type: select
+    proxies:
+      - 节点选择
+      - 全球直连
+      - 自动选择
+      - 负载均衡-轮询
+  - name: 全球直连
+    type: select
+    proxies:
+      - DIRECT
+  - name: 漏网之鱼
+    type: select
+    proxies:
+      - 节点选择
+      - 全球直连
+      - 自动选择
+      - 负载均衡-轮询
+rule-providers:
+  Bing:
+    type: http
+    behavior: classical
+    path: ./rules/Bing.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.yaml"
+    interval: 86400
+  Whatsapp:
+    type: http
+    behavior: classical
+    path: ./rules/Whatsapp.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Whatsapp/Whatsapp.yaml"
+    interval: 86400
+  Douyu:
+    type: http
+    behavior: classical
+    path: ./rules/Douyu.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Douyu/Douyu.yaml"
+    interval: 86400
+  DouYin:
+    type: http
+    behavior: classical
+    path: ./rules/DouYin.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/DouYin/DouYin.yaml"
+    interval: 86400
+  TikTok:
+    type: http
+    behavior: classical
+    path: ./rules/TikTok.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/TikTok/TikTok.yaml"
+    interval: 86400
+  Baidu:
+    type: http
+    behavior: classical
+    path: ./rules/Baidu.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Baidu/Baidu.yaml"
+    interval: 86400
+  WeChat:
+    type: http
+    behavior: classical
+    path: ./rules/WeChat.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/WeChat/WeChat.yaml"
+    interval: 86400                          
+  chatgpt:
+    type: http
+    behavior: classical
+    path: ./rules/OpenAI.yaml
+    url: "https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/RuleSet/OpenAI.yaml"
+    interval: 86400
+  Netflix:
+    type: http
+    behavior: classical
+    path: ./rules/Netflix.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Netflix/Netflix.yaml"
+    interval: 86400
+  Disney:
+    type: http
+    behavior: classical
+    path: ./rules/Disney.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Disney/Disney.yaml"
+    interval: 86400
+  YouTube:
+    type: http
+    behavior: classical
+    path: ./rules/YouTube.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/YouTube/YouTube.yaml"
+    interval: 86400
+  Spotify:
+    type: http
+    behavior: classical
+    path: ./rules/Spotify.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Spotify/Spotify.yaml"
+    interval: 86400
+  BiliBili:
+    type: http
+    behavior: classical
+    path: ./rules/BiliBili.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/BiliBili/BiliBili.yaml"
+    interval: 86400
+  Telegram:
+    type: http
+    behavior: classical
+    path: ./rules/Telegram.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Telegram/Telegram.yaml"
+    interval: 86400
+  Speedtest:
+    type: http
+    behavior: classical
+    path: ./rules/Speedtest.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Speedtest/Speedtest.yaml"
+    interval: 86400
+  PayPal:
+    type: http
+    behavior: classical
+    path: ./rules/PayPal.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/PayPal/PayPal.yaml"
+  TestFlight:
+    type: http
+    behavior: classical
+    path: ./rules/TestFlight.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/TestFlight/TestFlight.yaml"
+    interval: 86400
+  Apple:
+    type: http
+    behavior: classical
+    path: ./rules/Apple.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Apple/Apple.yaml"
+    interval: 86400
+  Google:
+    type: http
+    behavior: classical
+    path: ./rules/Google.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Google/Google.yaml"
+    interval: 86400     
+  Microsoft:
+    type: http
+    behavior: classical
+    path: ./rules/Microsoft.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Microsoft/Microsoft.yaml"
+    interval: 86400
+  GlobalMedia:
+    type: http
+    behavior: classical
+    path: ./rules/GlobalMedia_Classical.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml"      
+  Mainland:
+    type: http
+    behavior: classical
+    path: ./rules/China.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/China/China.yaml"
+    interval: 86400
+  MainlandIP:
+    type: http
+    behavior: classical
+    path: ./rules/ChinaIPs_IP.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/ChinaIPs/ChinaIPs_IP.yaml"
+    interval: 86400
+  Global:
+    type: http
+    behavior: classical
+    path: ./rules/Global_Classical.yaml
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Clash/Global/Global_Classical.yaml"
+    interval: 86400                                                    
+rules:
+ - DOMAIN-KEYWORD,bing,节点选择
+ - DOMAIN-KEYWORD,ccemby,DIRECT
+ - DOMAIN-KEYWORD,poloemby,emby公益服
+ - DOMAIN-KEYWORD,pololine,emby公益服
+ - RULE-SET,chatgpt,节点选择
+ - RULE-SET,Bing,节点选择 
+ - RULE-SET,Whatsapp,节点选择
+ - RULE-SET,Douyu,DIRECT
+ - RULE-SET,DouYin,DIRECT
+ - RULE-SET,TikTok,节点选择
+ - RULE-SET,Baidu,DIRECT
+ - RULE-SET,WeChat,DIRECT    
+ - RULE-SET,Netflix,Netflix
+ - RULE-SET,Disney,Disney+ 
+ - RULE-SET,YouTube,国外媒体
+ - RULE-SET,BiliBili,哔哩哔哩
+ - RULE-SET,Speedtest,Speedtest
+ - RULE-SET,PayPal,节点选择
+ - RULE-SET,TestFlight,苹果服务
+ - RULE-SET,Apple,苹果服务
+ - RULE-SET,Google,谷歌服务
+ - RULE-SET,Microsoft,微软服务
+ - RULE-SET,GlobalMedia,国外媒体 
+ - RULE-SET,Global,节点选择 
+ - RULE-SET,Mainland,全球直连
+ - RULE-SET,MainlandIP,全球直连     
+ - GEOIP,CN,全球直连
+ - MATCH,漏网之鱼
