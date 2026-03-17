@@ -1,0 +1,110 @@
+{
+  "id": "General℡",
+  "name": "General℡ 脚本订阅",
+  "author": "@General74110",
+  "icon": "https://raw.githubusercontent.com/General74110/Scripts/master/images/profile.png",
+  "repo": "https://github.com/General74110/Scripts",
+  "apps": [
+    {
+      "id": "KuwoMusic",
+      "name": "酷我音乐（时长+积分）",
+      "keys": ["Clear", "Kuwo_cookies"],
+      "desc": "支持多账号，请用 & 或 , 分隔多个 UID 和 SID 组",
+      "settings": [
+        {
+          "id": "Clear",
+          "name": "清除Cookies",
+          "val": "0",
+          "type": "number",
+          "placeholder": "0为关闭,1为开启",
+          "desc": "清除酷我音乐Cookies（时长+积分）"
+        },
+        {
+          "id": "Kuwo_cookies",
+          "name": "登录 UID (时长) / UID@SID (积分)",
+          "val": "",
+          "type": "text",
+          "placeholder": "loginUid 或 loginUid@loginSid（多个用 & 或 , 分隔）",
+          "desc": "时长模式: 仅填 loginUid\n积分模式: 填 loginUid@loginSid\n多个账户请用 & 分隔"
+        }
+      ],
+      "scripts": [
+        {
+          "name": "酷我音乐（时长）",
+          "script": "https://raw.githubusercontent.com/General74110/Scripts/master/Script/Task/Kuwomusic.js"
+        },
+        {
+          "name": "酷我音乐（积分）",
+          "script": "https://raw.githubusercontent.com/yao71232/dyxx2/refs/heads/main/kw.js"
+        }
+      ],
+      "icons": [
+        "https://raw.githubusercontent.com/General74110/Scripts/master/images/kuwo.png",
+        "https://raw.githubusercontent.com/General74110/Scripts/master/images/kuwo.png"
+      ]
+    },
+    {
+      "id": "QQreader",
+      "name": "QQ阅读",
+      "keys": ["QQYD_COOKIE"],
+      "desc": "自动完成QQ阅读任务",
+      "settings": [
+        {
+          "id": "QQYD_COOKIE",
+          "name": "QQ阅读Cookie",
+          "val": "",
+          "type": "text",
+          "placeholder": "",
+          "desc": ""
+        }
+      ],
+      "script": "https://raw.githubusercontent.com/General74110/Scripts/master/Script/Task/QQreader.js",
+      "icons": [
+        "https://raw.githubusercontent.com/General74110/Scripts/master/images/qqreader.png",
+        "https://raw.githubusercontent.com/General74110/Scripts/master/images/qqreader.png"
+      ]
+    },
+    {
+      "id": "xmly",
+      "name": "喜马拉雅",
+      "keys": ["xmlytoken"],
+      "desc": "喜马拉雅签到任务",
+      "settings": [
+        {
+          "id": "xmlytoken",
+          "name": "喜马拉雅Token",
+          "val": "",
+          "type": "text",
+          "placeholder": "输入多个账号Token，用#隔开",
+          "desc": "抓取的1&_token，多个Token用#隔开"
+        }
+      ],
+      "script": "https://raw.githubusercontent.com/General74110/Scripts/master/Script/Task/xmly.js",
+      "icons": [
+        "https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/Himalaya.png",
+        "https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/Himalaya.png"
+      ]
+    },
+    {
+      "id": "NetworkPolicy",
+      "name": "Surge 网络策略组",
+      "keys": ["networkGroups"],
+      "desc": "动态配置 Surge 策略组（单行 & 分隔 key=value）",
+      "settings": [
+        {
+          "id": "networkGroups",
+          "name": "策略组配置",
+          "val": "",
+          "type": "text",
+          "placeholder": "每条 key=value 用 & 分隔，例如 TikTok=TikTok线路&Open AI=Open AI线路",
+          "desc": "脚本会自动解析，每条 key=value，direct 默认为 DIRECT"
+        }
+      ],
+      "script": "https://raw.githubusercontent.com/General74110/Scripts/master/Script/Enevt/SSID.js",
+      "icons": [
+        "https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/netgoldstar.png",
+        "https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/netgoldstar.png"
+      ]
+    }
+  ]
+}
