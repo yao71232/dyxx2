@@ -42,69 +42,6 @@
         "https://raw.githubusercontent.com/General74110/Scripts/master/images/kuwo.png",
         "https://raw.githubusercontent.com/General74110/Scripts/master/images/kuwo.png"
       ]
-    },
-    {
-      "id": "QQreader",
-      "name": "QQ阅读",
-      "keys": ["QQYD_COOKIE"],
-      "desc": "自动完成QQ阅读任务",
-      "settings": [
-        {
-          "id": "QQYD_COOKIE",
-          "name": "QQ阅读Cookie",
-          "val": "",
-          "type": "text",
-          "placeholder": "",
-          "desc": ""
-        }
-      ],
-      "script": "https://raw.githubusercontent.com/General74110/Scripts/master/Script/Task/QQreader.js",
-      "icons": [
-        "https://raw.githubusercontent.com/General74110/Scripts/master/images/qqreader.png",
-        "https://raw.githubusercontent.com/General74110/Scripts/master/images/qqreader.png"
-      ]
-    },
-    {
-      "id": "xmly",
-      "name": "喜马拉雅",
-      "keys": ["xmlytoken"],
-      "desc": "喜马拉雅签到任务",
-      "settings": [
-        {
-          "id": "xmlytoken",
-          "name": "喜马拉雅Token",
-          "val": "",
-          "type": "text",
-          "placeholder": "输入多个账号Token，用#隔开",
-          "desc": "抓取的1&_token，多个Token用#隔开"
-        }
-      ],
-      "script": "https://raw.githubusercontent.com/General74110/Scripts/master/Script/Task/xmly.js",
-      "icons": [
-        "https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/Himalaya.png",
-        "https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/Himalaya.png"
-      ]
-    },
-    {
-      "id": "NetworkPolicy",
-      "name": "Surge 网络策略组",
-      "keys": ["networkGroups"],
-      "desc": "动态配置 Surge 策略组（单行 & 分隔 key=value）",
-      "settings": [
-        {
-          "id": "networkGroups",
-          "name": "策略组配置",
-          "val": "",
-          "type": "text",
-          "placeholder": "每条 key=value 用 & 分隔，例如 TikTok=TikTok线路&Open AI=Open AI线路",
-          "desc": "脚本会自动解析，每条 key=value，direct 默认为 DIRECT"
-        }
-      ],
-      "script": "https://raw.githubusercontent.com/General74110/Scripts/master/Script/Enevt/SSID.js",
-      "icons": [
-        "https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/netgoldstar.png",
-        "https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/netgoldstar.png"
-      ]
     }
   ]
 }
