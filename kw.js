@@ -28,7 +28,7 @@
 🎯重写脚本:
  在网页酷我音乐上登陆，手机端需切换到桌面版才有登录口，登陆成功后切回移动版，成功获取Cookies！
   [Script]
-http-request ^https:\/\/.*\/(newh5app\/singers\/0\?|openapi\/v1\/www\/search\/searchKey\?) script-path=https://raw.githubusercontent.com/yao71232/dyxx2/refs/heads/main/kw.js, requires-body=true, timeout=60, enabled=false, tag=酷我音乐(积分)获取Cookies, images-url=https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png
+http-request ^https:\/\/.*\/(newh5app\/singers\/0\?|openapi\/v1\/www\/search\/searchKey\?) script-path=https://raw.githubusercontent.com/General74110/Scripts/master/Script/Task/kuwo_Cookies.js, requires-body=true, timeout=60, enabled=false, tag=酷我音乐(积分)获取Cookies, images-url=https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png
 [MITM]
 hostname = *.kuwo.cn
 ⏰定时任务:
@@ -40,7 +40,7 @@ hostname = *.kuwo.cn
 
  
 📦BoxJs地址:
- https://raw.githubusercontent.com/yao71232/dyxx2/refs/heads/main/kw.json(General℡版)改变了获取Cookies的途径，添加了多账号，增加多次运行防遗漏，更改为每1500万积分兑换30天的会员
+ https://raw.githubusercontent.com/General74110/Scripts/master/boxjs/General.json(General℡版)改变了获取Cookies的途径，添加了多账号，增加多次运行防遗漏，更改为每15万积分兑换30天的会员
 
  ## 👍https://raw.githubusercontent.com/MCdasheng/QuantumultX/main/mcdasheng.boxjs.json（原作者大圣版）
 
@@ -1520,3 +1520,4 @@ function Env(t, s) {
                     : this.isNode() && process.exit(1);
         }
     })(t, s);
+}
